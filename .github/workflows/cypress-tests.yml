@@ -10,6 +10,10 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        project: [cypress-course]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,7 +24,9 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
+        working-directory: ${{ matrix.project }}
         run: npm install
 
       - name: Run Cypress tests
+        working-directory: ${{ matrix.project }}
         run: npx cypress run
