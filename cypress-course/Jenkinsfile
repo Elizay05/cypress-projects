@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'cypress/included:15.11.0'
+            args '--entrypoint=""'
         }
     }
 
@@ -10,7 +11,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 dir('cypress-course') {
-                    sh 'npm install'
+                    sh 'npm ci'
                 }
             }
         }
